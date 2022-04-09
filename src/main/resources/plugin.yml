@@ -1,0 +1,9 @@
+name: Bebr0zavr
+version: '${project.version}'
+main: org.bebr0.bebr0zavr.Plugin
+api-version: 1.18
+
+commands:
+  bebr0zavr:
+    aliases:
+      - bz
