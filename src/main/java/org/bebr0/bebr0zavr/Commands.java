@@ -23,6 +23,7 @@ public class Commands implements CommandExecutor {
 
         if (args[0].equalsIgnoreCase("startGame")){
             Game game = new Game(player);
+            
             player.sendMessage("Успех!");
             return true;
         }

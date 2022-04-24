@@ -7,15 +7,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class JumpEvent implements Listener {
+public class SneakEvent implements Listener {
 
     @EventHandler
-    public void onJump(InventoryClickEvent event) {
+    public void onSneak(InventoryClickEvent event){
         if (event.getCurrentItem() != null) {
-            if (event.getCurrentItem().getType() == Game.jumpItem) {
+            if (event.getCurrentItem().getType() == Game.sneakItem) {
                 Game game = Game.getGameOfAPlayer((Player) event.getWhoClicked());
                 if (game != null) {
-                    game.getDino().jump();
+                    game.getDino().sneak();
                 }
 
                 event.setCancelled(true);

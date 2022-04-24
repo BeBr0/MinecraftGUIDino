@@ -6,12 +6,18 @@ public class Dino {
     private int bottomPos = 37;
     private final Game game;
 
+    private boolean isJumping = false;
+    private boolean isSneaking = false;
+
     public Dino(Game game) {
         this.game = game;
     }
 
     public void jump(){
         new Thread(() -> {
+            if (isJumping || isSneaking)
+                return;
+            isJumping = true;
             while (getTopPos() > 9){
                 game.moveOneFrame(true);
                 try {
@@ -29,7 +35,25 @@ public class Dino {
                     e.printStackTrace();
                 }
             }
+
+            isJumping = false;
         }).start();
+    }
+
+    public void sneak(){
+        if (isJumping)
+            return;
+
+        if (!isSneaking){
+            topPos = bottomPos + 1;
+            isSneaking = true;
+        }
+        else{
+            topPos = bottomPos - 9;
+            isSneaking = false;
+        }
+
+        game.sneakDino();
     }
 
     public int getTopPos() {
@@ -46,5 +70,9 @@ public class Dino {
 
     public void setBottomPos(int bottomPos) {
         this.bottomPos = bottomPos;
+    }
+
+    public boolean isSneaking() {
+        return isSneaking;
     }
 }

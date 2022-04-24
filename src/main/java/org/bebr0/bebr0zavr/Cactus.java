@@ -6,19 +6,15 @@ import org.bukkit.inventory.ItemStack;
 public class Cactus {
 
     public static final Material cactusMaterial = Material.CACTUS;
+    public static final int initialPos = 44;
 
     private int pos;
-    private Game game;
+    private final Game game;
 
     public Cactus(Game game) {
         this.game = game;
-        pos = 44;
+        pos = initialPos;
         game.getField().setItem(pos, new ItemStack(cactusMaterial));
-    }
-
-    public void remove(){
-        game.getField().setItem(pos, new ItemStack(Material.AIR));
-        game.getCactusList().remove(this);
     }
 
     public void move(){
@@ -27,7 +23,7 @@ public class Cactus {
 
         if (game.getField().getItem(pos) != null)
             game.stopGame();
-        if (pos > 35)
+        if (pos > initialPos - 9)
             game.getField().setItem(pos, new ItemStack(cactusMaterial));
         else
             game.getCactusList().remove(this);
